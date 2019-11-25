@@ -54,11 +54,11 @@ public class DatabaseUtil {
     }
 
 
-    public static void SetWordvis(Words word){
+    public static void SetWordvis(Words word,int flag){
         int id=word.getId();
         SQLiteDatabase db=SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" +
                 DBManager.DB_NAME, null);
-        db.execSQL("update words set vis=? where id=?",new String[]{"1",""+id});
+        db.execSQL("update words set vis=? where id=?",new String[]{""+flag,""+id});
     }
     public  static String[] geteng(Words words,int num){
         int mod=Englishlibraty.size();
