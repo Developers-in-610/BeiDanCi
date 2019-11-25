@@ -25,13 +25,22 @@ public class DatabaseUtil {
     public  static HashSet<String> Englishlibraty=new HashSet<>();
     //英文库用于复习
 
+    public static final int NEW_WORD=0;
+    public static final int KNOWN_WORD=1;
+    public static final int UNKNOWN_WORD=2;
+    public static final int All=3;
     //用与查找背过或没有背过的单词
     //visornot --1背过 0没背过
     //num 查找的单词的个数
     public static ArrayList<Words> GetWord(int visornot,int num) {
         SQLiteDatabase readableDatabase = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" +
                 DBManager.DB_NAME, null);
-        Cursor c = readableDatabase.rawQuery("select * from words where vis = ?", new String[]{""+visornot});
+        Cursor c=null;
+        if (visornot==All) {
+             c = readableDatabase.query("words",null, null,null,null,null,null);
+        } else {
+            c = readableDatabase.rawQuery("select * from words where vis = ?", new String[]{"" + visornot});
+        }
         ArrayList<Words> al = new ArrayList<Words>();
         while (c.moveToNext()) {
             int _id = c.getInt(c.getColumnIndex("id"));
