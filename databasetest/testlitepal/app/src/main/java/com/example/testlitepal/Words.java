@@ -6,19 +6,27 @@ public class Words {
 
 
         @Column(unique = true, defaultValue = "unknown")
-        private Integer id;
+        private int id;
         private String word;
         private String chineses;
+        private  int visted;
 
-        public Integer getId() {
-            return id;
-        }
+    public void setVisted(int visted) {
+        this.visted = visted;
+    }
+
+    public int getVisted() {
+        return visted;
+    }
+
+    public int getId() {
+            return id; }
 
         public String getWord() {
             return word;
         }
 
-        public void setId(Integer id) {
+        public void setId(int id) {
             this.id = id;
         }
 

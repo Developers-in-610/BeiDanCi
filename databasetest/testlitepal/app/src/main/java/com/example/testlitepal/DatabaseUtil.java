@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 import java.util.Set;
+import java.util.Vector;
 
 public class DatabaseUtil {
     //中文库用于复习
@@ -27,11 +28,10 @@ public class DatabaseUtil {
      //用与查找背过或没有背过的单词
     //visornot --1背过 0没背过
     //num 查找的单词的个数
-    public static ArrayList<Words> GetUnvistedWord(int visornot,int num) {
+    public static ArrayList<Words> GetWord(int visornot,int num) {
         SQLiteDatabase readableDatabase = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" +
                 DBManager.DB_NAME, null);
         Cursor c = readableDatabase.rawQuery("select * from words where vis = ?", new String[]{""+visornot});
-        int getnum = 0;
         ArrayList<Words> al = new ArrayList<Words>();
         while (c.moveToNext()) {
             int _id = c.getInt(c.getColumnIndex("id"));
@@ -43,9 +43,11 @@ public class DatabaseUtil {
             words.setId(_id);
             words.setWord(word);
             words.setChineses(chineses);
+            words.setVisted(c.getInt(c.getColumnIndex("vis")));
             al.add(words);
-            if (al.size()==getnum)
+            if (al.size()==num)
                 break;
+
         }
         c.close();
         return al;
@@ -89,9 +91,11 @@ public class DatabaseUtil {
         Random random = new Random();
         HashSet<Integer> stnum=new HashSet<Integer>();
         while(stnum.size()<num){
-            stnum.add(new Integer(random.nextInt())%mod);
+
+            stnum.add(new Integer(random.nextInt(mod)));
         }
-        String ans[]=new String[]{};
+
+        String [] ans=new String[num] ;
         Object []randomnum=stnum.toArray();
         Iterator iterator=chineselibrary.iterator();
         int count=0;
@@ -101,8 +105,12 @@ public class DatabaseUtil {
                 String tmp=(String)iterator.next();
                 if(!tmp.equals(wordeng)) {
                     ans[index] =tmp;
-                    index++;
+
                 }
+                else{
+                    ans[index]=new String("备用的");
+                }
+                index++;
             }
             count++;
         }
