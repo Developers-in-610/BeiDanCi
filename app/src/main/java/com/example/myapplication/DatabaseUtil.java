@@ -1,4 +1,4 @@
-package com.example.testlitepal;
+package com.example.myapplication;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,7 +25,7 @@ public class DatabaseUtil {
     public  static HashSet<String> Englishlibraty=new HashSet<>();
     //英文库用于复习
 
-     //用与查找背过或没有背过的单词
+    //用与查找背过或没有背过的单词
     //visornot --1背过 0没背过
     //num 查找的单词的个数
     public static ArrayList<Words> GetWord(int visornot,int num) {
@@ -54,12 +54,13 @@ public class DatabaseUtil {
     }
 
 
-    public static void SetWordvis(Words word){
+    public static void SetWordvis(Words word,int flag){
         int id=word.getId();
         SQLiteDatabase db=SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" +
                 DBManager.DB_NAME, null);
-        db.execSQL("update words set vis=? where id=?",new String[]{"1",""+id});
+        db.execSQL("update words set vis=? where id=?",new String[]{""+flag,""+id});
     }
+
     public  static String[] geteng(Words words,int num){
         int mod=Englishlibraty.size();
         String wordeng=words.getWord();

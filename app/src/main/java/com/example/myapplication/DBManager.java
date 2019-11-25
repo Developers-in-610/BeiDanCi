@@ -1,4 +1,4 @@
-package com.example.testlitepal;
+package com.example.myapplication;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,7 +18,7 @@ public class DBManager {
             DB_NAME = "words.db";
     //保存的数据库文件名
     public static final String
-            PACKAGE_NAME = "com.example.testlitepal";
+            PACKAGE_NAME = "com.example.myapplication";
     public static final String
             DB_PATH = "/data"
             +
@@ -88,3 +88,4 @@ public class DBManager {
     }
 
 }
+
