@@ -46,8 +46,6 @@ public class DatabaseUtil {
                     int _id = c.getInt(c.getColumnIndex("id"));
                     String word = c.getString(c.getColumnIndex("word"));
                     String chineses = c.getString(c.getColumnIndex("chineses"));
-                    chineselibrary.add(chineses);
-                    Englishlibraty.add(word);
                     Words words = new Words();
                     words.setId(_id);
                     words.setWord(word);
