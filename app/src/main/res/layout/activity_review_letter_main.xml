@@ -44,7 +44,11 @@
 
             android:background="#00000000"
 
-            android:layout_marginLeft="35dp"
+
+
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="100dp"
+
 
             android:layout_marginBottom="20dp"
             android:layout_marginTop="30dp"
@@ -79,6 +83,7 @@
             android:layout_toRightOf="@id/fullSpell"
 
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,7 +108,7 @@
             android:layout_marginTop="30dp"
             android:layout_below="@id/describe1"
 
-            android:id="@+id/test1"
+            android:id="@+id/challenge"
             android:src="@mipmap/book2"
             />
         <TextView
@@ -113,7 +118,7 @@
             android:textSize="30dp"
             android:textStyle="bold"
             android:gravity="center"
-            android:layout_below="@id/test1"
+            android:layout_below="@id/challenge"
             android:id="@+id/describe3"
             android:layout_marginLeft="35dp"
             />
@@ -128,7 +133,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginTop="30dp"
             android:layout_below="@id/describe2"
-            android:layout_toRightOf="@id/test1"
+            android:layout_toRightOf="@id/challenge"
 
             android:id="@+id/test2"
             android:src="@mipmap/book2"
@@ -141,11 +146,13 @@
             android:textStyle="bold"
             android:gravity="center"
             android:layout_below="@id/test2"
-            android:layout_toRightOf="@id/test1"
+            android:layout_toRightOf="@id/challenge"
             android:id="@+id/describe4"
             android:layout_marginLeft="40dp"
 
             />
+
+
 
     </RelativeLayout>
 
