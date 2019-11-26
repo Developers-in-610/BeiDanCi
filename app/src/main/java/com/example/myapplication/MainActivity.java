@@ -19,10 +19,17 @@ public class MainActivity extends Activity {
         DBManager dbHelper=new DBManager(this);
         dbHelper.openDatabase();
         Button review=(Button)findViewById(R.id.button);
+        Button memorize=(Button) findViewById(R.id.memwords);
         review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this,ReviewLetterMain.class));
+            }
+        });
+        memorize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,MemorizeWords.class));
             }
         });
 
