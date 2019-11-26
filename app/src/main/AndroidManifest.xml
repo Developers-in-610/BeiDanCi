@@ -13,6 +13,7 @@
         <activity android:name=".ReviewLetter2" />
         <activity android:name=".ReviewLetter1" />
         <activity android:name=".ReviewLetterMain" />
+        <activity android:name=".TimeLimitedChallenge" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
