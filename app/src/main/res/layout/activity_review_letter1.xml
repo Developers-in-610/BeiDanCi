@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="50dp"
         android:gravity="center"
-        android:text="adj:特大的；巨大的"
+
         android:id="@+id/chinese"
         />
     <LinearLayout
@@ -26,27 +26,54 @@
         android:orientation="horizontal"
         >
         <ImageView
-            android:layout_width="50dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:src="@mipmap/pencil"
             />
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="5"
             android:layout_height="match_parent"
             android:id="@+id/answer"
             android:layout_marginLeft="5dp"
             />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+
+            android:id="@+id/judge"
+            android:visibility="invisible"
+            />
 
     </LinearLayout>
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/summit"
+        android:orientation="horizontal"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:layout_marginTop="50dp"
-        android:text="确定"
-        android:layout_gravity="center"
-        />
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/submit"
+            android:text="提交"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/IKnow"
+            android:text="已学会"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+
 
 </LinearLayout>

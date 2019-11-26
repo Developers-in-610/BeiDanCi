@@ -25,13 +25,54 @@ public class DatabaseUtil {
     public  static HashSet<String> Englishlibraty=new HashSet<>();
     //英文库用于复习
 
-    public static final int NEW_WORD=0;
-    public static final int KNOWN_WORD=1;
-    public static final int UNKNOWN_WORD=2;
-    public static final int All=3;
+    public static final int NEW_WORD=0;//未学习的新词
+    public static final int KNOWN_WORD=1;//已经学会的单词
+    public static final int UNKNOWN_WORD=2;//学了但还不会的单词
+    public static final int All=3;//全部单词
     //用与查找背过或没有背过的单词
     //visornot --1背过 0没背过
     //num 查找的单词的个数
+
+    public static ArrayList<Words>ReviewWord(int num,int fence){
+        SQLiteDatabase database=SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
+        Cursor c=null;
+        c=database.rawQuery("select * from words where vis=?",new String[]{""+UNKNOWN_WORD});
+        ArrayList<Words> al = new ArrayList<Words>();
+        int count=1;
+        if(c.moveToFirst()){
+            do{
+
+                if(count==fence){
+                    int _id = c.getInt(c.getColumnIndex("id"));
+                    String word = c.getString(c.getColumnIndex("word"));
+                    String chineses = c.getString(c.getColumnIndex("chineses"));
+                    chineselibrary.add(chineses);
+                    Englishlibraty.add(word);
+                    Words words = new Words();
+                    words.setId(_id);
+                    words.setWord(word);
+                    words.setChineses(chineses);
+                    words.setVisted(c.getInt(c.getColumnIndex("vis")));
+                    al.add(words);
+                    if (al.size()==num)
+                        break;
+                }
+                count++;
+            }while (c.moveToNext());
+        }
+        c.close();
+        return al;
+    }
+
+    public static int countNum(){
+        SQLiteDatabase database=SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
+        Cursor c=null;
+        c=database.rawQuery("select * from words where vis=?",new String[]{""+UNKNOWN_WORD});
+        return c.getCount();
+    }
+
+
+
     public static ArrayList<Words> GetWord(int visornot,int num) {
         SQLiteDatabase readableDatabase = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" +
                 DBManager.DB_NAME, null);
