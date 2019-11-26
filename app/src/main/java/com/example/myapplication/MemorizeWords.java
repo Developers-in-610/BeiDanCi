@@ -1,7 +1,9 @@
 package com.example.myapplication;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +21,7 @@ public class MemorizeWords extends AppCompatActivity {
     private Words nowword;
     private int knownum,newwordnum;
     public static int totalnum;
-    private Button throwit;
+    private Button bthrowit;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -45,12 +47,16 @@ public class MemorizeWords extends AppCompatActivity {
                 }
                 else if(text.equals("还是不太熟")){
                     nextword(2);
-
-
                 }
-
             }
         });
+        bthrowit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showdialog();
+            }
+        });
+
 
 
 
@@ -64,7 +70,7 @@ public class MemorizeWords extends AppCompatActivity {
         index=0;
         bknow=(Button) findViewById(R.id.knowbutton);
         bunknow=(Button) findViewById(R.id.unknowbutton);
-        throwit=(Button) findViewById(R.id.throwit);
+        bthrowit=(Button) findViewById(R.id.throwit);
         tvhintchinese=(TextView) findViewById(R.id.hintchinese);
         tvenglish=(TextView) findViewById(R.id.english);
         tvokword=(TextView) findViewById(R.id.okword);
@@ -87,7 +93,8 @@ public class MemorizeWords extends AppCompatActivity {
             knownum++;
             tvokword.setText(""+knownum);
             if(knownum==totalnum){
-                //////处理。。。。
+                showfinishdialog();
+                return;
             }
         }
         index=(index+1)%totalnum;
@@ -101,4 +108,43 @@ public class MemorizeWords extends AppCompatActivity {
         bunknow.setText("提示一下吧");
 
     }
+    public  void showdialog(){
+        AlertDialog.Builder bb=new AlertDialog.Builder(this);
+        bb.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                nextword(3);
+            }
+        });
+        bb.setNegativeButton("按错了", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        bb.setMessage("你确定要丢掉"+nowword.getWord()+" "+nowword.getChineses());
+        bb.setTitle("提示");
+        bb.show();
+
+    }
+    public  void showfinishdialog(){
+        AlertDialog.Builder bbb=new AlertDialog.Builder(this);
+        bbb.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        bbb.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        bbb.setTitle("消息");
+        bbb.setMessage("完成啦！");
+        bbb.show();
+
+    }
+
 }
