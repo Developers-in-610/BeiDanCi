@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".memorize_words">
+    tools:context=".MemorizeWords">
 
 
     <LinearLayout
@@ -25,7 +25,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="今日新词" />
+                android:text="今日ok单词" />
 
             <TextView
                 android:id="@+id/textView"
@@ -34,10 +34,10 @@
                 android:text="30" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/okword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2" />
+                android:text="0" />
         </LinearLayout>
 
         <LinearLayout
@@ -47,22 +47,22 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textview08"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="今日复习" />
+                android:text="今日新词" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="60" />
+                android:text="30" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/newword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="5" />
+                android:text="0" />
         </LinearLayout>
 
         <LinearLayout
@@ -94,7 +94,7 @@
 
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/english"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -110,7 +110,7 @@
             android:text="朗读一下吧" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/hintchinese"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="5"
@@ -119,16 +119,23 @@
     </LinearLayout>
 
     <Button
-    android:id="@+id/button2"
+    android:id="@+id/knowbutton"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="0.5"
     android:text="我认识" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/unknowbutton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:text="提示一下吧" />
+
+    <Button
+        android:id="@+id/throwit"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:text="太熟扔掉吧" />
 </LinearLayout>
