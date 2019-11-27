@@ -26,23 +26,25 @@ public class DatabaseUtil {
     //英文库用于复习
 
     public static final int NEW_WORD=0;//未学习的新词
-    public static final int KNOWN_WORD=1;//已经学会的单词
-    public static final int UNKNOWN_WORD=2;//学了但还不会的单词
-    public static final int All=3;//全部单词
+    public static final int UNKNOWN_WORD_CAN=1;//学了会但还需要复习的
+    public static final int UNKNOWN_WORD_CANT=2;//学了但还不会的单词
+    public static final int KNOWN_WORD=3;//已经学会的单词
+    public static final int All=4;//全部单词
     //用与查找背过或没有背过的单词
-    //visornot --1背过 0没背过
+
     //num 查找的单词的个数
 
     public static ArrayList<Words>ReviewWord(int num,int fence){
         SQLiteDatabase database=SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
         Cursor c=null;
-        c=database.rawQuery("select * from words where vis=?",new String[]{""+UNKNOWN_WORD});
+        c=database.rawQuery("select * from words where vis=? or vis=?",new String[]{""+UNKNOWN_WORD_CAN ,""+UNKNOWN_WORD_CANT});
         ArrayList<Words> al = new ArrayList<Words>();
-        int count=1;
+        Log.v("hh","reviewWord:"+c.getCount());
+        int count=0;
         if(c.moveToFirst()){
             do{
 
-                if(count==fence){
+                if(count>=fence){
                     int _id = c.getInt(c.getColumnIndex("id"));
                     String word = c.getString(c.getColumnIndex("word"));
                     String chineses = c.getString(c.getColumnIndex("chineses"));
@@ -62,11 +64,13 @@ public class DatabaseUtil {
         return al;
     }
 
-    public static int countNum(){
+    public static int countNum(int f){
+
         SQLiteDatabase database=SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
         Cursor c=null;
-        c=database.rawQuery("select * from words where vis=?",new String[]{""+UNKNOWN_WORD});
-        return c.getCount();
+        c=database.rawQuery("select * from words where vis=? or vis=?",new String[]{""+UNKNOWN_WORD_CAN ,""+UNKNOWN_WORD_CANT});
+        Log.v("hh","countNum:"+c.getCount());
+        return c.getCount()-f;
     }
 
 

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,18 +29,31 @@ public class ReviewLetter1 extends AppCompatActivity {
     Button iKnow;
     ImageView judge;
     ArrayList<Words> wordsArrayList;
-    int count=1;
+    TextView correctAnswer;
+    int count;
+    int time;
+    Words word;
     AlertDialog.Builder dialog;
+    private static int fence;
     private static final int COMPLETED = 0;
 
+
+    public static void actionStart(Context context,int f){
+        Intent intent=new Intent(context,MainActivity.class);
+        intent.putExtra("newFence",f);
+        context.startActivity(intent);
+        Log.v("hh","letter1action: "+f);
+    }
     private void init(){
-        wordsArrayList=DatabaseUtil.GetWord(DatabaseUtil.NEW_WORD,10);
+        count=1;
+
         chinese=(TextView)findViewById(R.id.chinese);
         answer=(EditText)findViewById(R.id.answer);
         submit=(Button)findViewById(R.id.submit);
         iKnow=(Button)findViewById(R.id.IKnow);
         dialog=new AlertDialog.Builder(ReviewLetter1.this);
         judge=(ImageView)findViewById(R.id.judge);
+        correctAnswer=(TextView)findViewById(R.id.correct_answer);
 
     }
 
@@ -55,7 +69,7 @@ public class ReviewLetter1 extends AppCompatActivity {
         dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                startActivity(new Intent(ReviewLetter1.this,MainActivity.class));
+                actionStart(ReviewLetter1.this,fence);
             }
         });
         dialog.show();
@@ -70,6 +84,9 @@ public class ReviewLetter1 extends AppCompatActivity {
                 count++;
                 judge.setVisibility(View.INVISIBLE);
                 answer.setText("");
+                correctAnswer.setVisibility(View.INVISIBLE);
+                submit.setVisibility(View.VISIBLE);
+                iKnow.setVisibility(View.VISIBLE);
             }
         }
     };
@@ -78,30 +95,54 @@ public class ReviewLetter1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_letter1);
         init();
-        int num=0,fence=1;
-        //Log.v("hhh",""+DatabaseUtil.countNum());
-        if(DatabaseUtil.countNum()<=-1){
-           setAlert("当前没有新词可复习，赶紧去背新词吧！");
-        }else  if(DatabaseUtil.countNum()<15){
-            num=DatabaseUtil.countNum();
-        }else {
-            num=15;
-        }
-        Words word=wordsArrayList.get(0);
-        chinese.setText(word.getChineses());
+        int num=0;
+        fence=getIntent().getIntExtra("Fence",0);
+        Log.v("hhh","count:"+DatabaseUtil.countNum(fence));
+        Log.v("hh","letter_create: "+fence);
 
-        //wordsArrayList=DatabaseUtil.ReviewWord(num,fence);
+        if(DatabaseUtil.countNum(fence)<=0){
+           setAlert("当前没有新词可复习，赶紧去背新词吧！");
+           return;
+
+        }else  if(DatabaseUtil.countNum(fence)<5){
+            num=DatabaseUtil.countNum(fence);
+            Log.v("hh","gg");
+        }else {
+            num=5;
+        }
+        Log.v("hh","num="+num);
+        wordsArrayList=DatabaseUtil.ReviewWord(num,fence);
+        Log.v("hh","size: "+wordsArrayList.size());
+
+        word=wordsArrayList.get(0);
+        chinese.setText(word.getChineses());
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fence++;
+
                 if(count<wordsArrayList.size()){
+
                     String ans=answer.getText().toString();
-                    Words word=wordsArrayList.get(count-1);
+
+                        word=wordsArrayList.get(count-1);
+
+                    Log.v("hh","pos"+count);
+                    submit.setVisibility(View.GONE);
+                    iKnow.setVisibility(View.GONE);
                     if(ans.equals(word.getWord())){
                         judge.setImageResource(R.mipmap.correct);
+                        time=500;
+                        DatabaseUtil.SetWordvis(word,DatabaseUtil.UNKNOWN_WORD_CAN);
+
                     }else {
                         judge.setImageResource(R.mipmap.wrong);
+                        time=200;
+                        correctAnswer.setText(word.getWord());
+                        correctAnswer.setVisibility(View.VISIBLE);
+                        DatabaseUtil.SetWordvis(word,DatabaseUtil.UNKNOWN_WORD_CANT);
+
                     }
 
                     judge.setVisibility(View.VISIBLE);
@@ -110,11 +151,11 @@ public class ReviewLetter1 extends AppCompatActivity {
                         @Override
                         public void run() {
                             Message msg = new Message();
-                            msg.what = COMPLETED;
+                            msg.what=COMPLETED;
                             handler.sendMessage(msg);
                         }
                     };
-                    timer.schedule(task,500);
+                    timer.schedule(task,time);
 
 
                 }else{
@@ -127,9 +168,15 @@ public class ReviewLetter1 extends AppCompatActivity {
         iKnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fence++;
+                Words words=wordsArrayList.get(count);
                 if(count<wordsArrayList.size()){
+                    DatabaseUtil.SetWordvis(words,DatabaseUtil.KNOWN_WORD);
+
                     flush(count);
                     count++;
+                    fence--;
+
                 }else {
                     setAlert("恭喜你！今天的复习任务已经完成啦！");
                 }
