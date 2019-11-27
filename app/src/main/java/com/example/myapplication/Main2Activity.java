@@ -27,6 +27,7 @@ public class Main2Activity extends Activity
         anima.setDuration(5000);// 设置动画显示时间
         welcomeImg.startAnimation(anima);
         anima.setAnimationListener(new AnimationImpl());
+
     }
     private class AnimationImpl implements AnimationListener {
         @Override
