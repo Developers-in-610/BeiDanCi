@@ -36,7 +36,7 @@ public class TimeLimitedChallenge extends AppCompatActivity {
     private Button choice3;
     private Button choice4;
     private int fence;
-
+    private volatile boolean exit=false;
 
     private class Counter implements Runnable
     {
@@ -51,15 +51,24 @@ public class TimeLimitedChallenge extends AppCompatActivity {
     };
         @Override
         public void run() {
+
             for (int i = 20; i >= 0; i--) {
-                handler.sendEmptyMessage(i);
+if(!exit)
+{  handler.sendEmptyMessage(i);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+
                 }
-            }
+            }}
         }
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        exit=true;
     }
     private void showDialog(String s)
     {
@@ -82,11 +91,7 @@ public class TimeLimitedChallenge extends AppCompatActivity {
             startActivity(new Intent(TimeLimitedChallenge.this,ReviewLetterMain.class));
         }
     };
-    public int rand()
-    {
-        return (int)(0+Math.random()*(al.size()-0+1));
 
-    }
     public void init() {
         knownum = 0;
         totalnum = 0;
@@ -106,9 +111,9 @@ public class TimeLimitedChallenge extends AppCompatActivity {
             tvenglish.setText(nowword.getWord());
             chineses = new LinkedList<String>() {{
                 add(nowword.getChineses());
-                add(al.get(index + 1).getChineses());
-                add(al.get(index + 2).getChineses());
-                add(al.get(index + 3).getChineses());
+                add(al.get((index + 1)%totalnum).getChineses());
+                add(al.get((index + 2)%totalnum).getChineses());
+                add(al.get((index + 3)%totalnum).getChineses());
             }};
 
             Collections.shuffle(chineses);
@@ -118,6 +123,7 @@ public class TimeLimitedChallenge extends AppCompatActivity {
             choice4.setText(chineses.get(3));
         }
     }
+
 
 
     @Override
