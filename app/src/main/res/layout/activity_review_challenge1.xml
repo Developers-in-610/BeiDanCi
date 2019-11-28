@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="得分："
+            android:text="得分：0"
             android:id="@+id/score"
             android:layout_gravity="center"
             />
