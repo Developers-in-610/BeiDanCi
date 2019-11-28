@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +9,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class DatabaseUtil {
     //用与查找背过或没有背过的单词
 
     //num 查找的单词的个数
+
 
     public static ArrayList<Words>ReviewWord(int num,int fence){
         SQLiteDatabase database=SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
@@ -71,7 +74,7 @@ public class DatabaseUtil {
         SQLiteDatabase database=SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
         Cursor c=null;
         c=database.rawQuery("select * from words where vis=? or vis=?",new String[]{""+UNKNOWN_WORD_CAN ,""+UNKNOWN_WORD_CANT});
-        Log.v("hh","countNum:"+c.getCount());
+
         return c.getCount()-f;
     }
 
