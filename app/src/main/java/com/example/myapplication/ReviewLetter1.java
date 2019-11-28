@@ -44,9 +44,20 @@ public class ReviewLetter1 extends AppCompatActivity {
         context.startActivity(intent);
         Log.v("hh","letter1action: "+f);
     }
+    private void setAlert(String s){
+
+        dialog.setMessage(s);
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                actionStart(ReviewLetter1.this,fence);
+            }
+        });
+        dialog.show();
+    }
     private void init(){
         count=1;
-
         chinese=(TextView)findViewById(R.id.chinese);
         answer=(EditText)findViewById(R.id.answer);
         submit=(Button)findViewById(R.id.submit);
@@ -62,18 +73,7 @@ public class ReviewLetter1 extends AppCompatActivity {
         chinese.setText(word.getChineses());
     }
 
-    private void setAlert(String s){
 
-        dialog.setMessage(s);
-        dialog.setCancelable(false);
-        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                actionStart(ReviewLetter1.this,fence);
-            }
-        });
-        dialog.show();
-    }
 
     private Handler handler=new Handler(){
         @Override
@@ -97,22 +97,22 @@ public class ReviewLetter1 extends AppCompatActivity {
         init();
         int num=0;
         fence=getIntent().getIntExtra("Fence",0);
-        Log.v("hhh","count:"+DatabaseUtil.countNum(fence));
-        Log.v("hh","letter_create: "+fence);
+        //Log.v("hhh","count:"+DatabaseUtil.countNum(fence));
+        //Log.v("hh","letter_create: "+fence);
 
         if(DatabaseUtil.countNum(fence)<=0){
            setAlert("当前没有新词可复习，赶紧去背新词吧！");
            return;
 
-        }else  if(DatabaseUtil.countNum(fence)<5){
+        }else  if(DatabaseUtil.countNum(fence)<15){
             num=DatabaseUtil.countNum(fence);
-            Log.v("hh","gg");
+
         }else {
-            num=5;
+            num=15;
         }
-        Log.v("hh","num="+num);
+        //Log.v("hh","num="+num);
         wordsArrayList=DatabaseUtil.ReviewWord(num,fence);
-        Log.v("hh","size: "+wordsArrayList.size());
+        //Log.v("hh","size: "+wordsArrayList.size());
 
         word=wordsArrayList.get(0);
         chinese.setText(word.getChineses());
@@ -128,7 +128,7 @@ public class ReviewLetter1 extends AppCompatActivity {
 
                         word=wordsArrayList.get(count-1);
 
-                    Log.v("hh","pos"+count);
+                    //Log.v("hh","pos"+count);
                     submit.setVisibility(View.GONE);
                     iKnow.setVisibility(View.GONE);
                     if(ans.equals(word.getWord())){
