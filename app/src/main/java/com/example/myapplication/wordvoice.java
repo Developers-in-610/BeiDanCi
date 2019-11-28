@@ -3,6 +3,7 @@ package com.example.myapplication;
 
 import android.app.Service;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.IBinder;
@@ -28,25 +29,24 @@ public class wordvoice extends Service {
             mp.start();
         } else {
             String query = intent.getStringExtra("query");
+            String url="http://dict.youdao.com/dictvoice?audio=" + query;
             // System.out.println("http://dict.youdao.com/dictvoice?audio=" + query);
-            Uri location = Uri.parse("http://dict.youdao.com/dictvoice?audio=" + query);
+//            Uri location = Uri.parse("http://dict.youdao.com/dictvoice?audio=" + query);
+//
+////            mp = MediaPlayer.create(this, location);
+//            mp = new MediaPlayer();
 
-//            mp = MediaPlayer.create(this, location);
-            mp = new MediaPlayer();
-            Map<String,String> headers = new HashMap<String,String>();
-            headers.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/18.17763");
+
             try {
-                mp.setDataSource(this,location,headers);
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-            try {
-                mp.prepare();
+                mp= new MediaPlayer();
+                mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                mp.setDataSource(url);
+                mp.prepare(); // might take long! (for buffering, etc)
+                mp.start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            // System.out.println("音乐开始播放");
-            mp.start();
+
 
             // 音乐播放完毕的事件处理
             mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

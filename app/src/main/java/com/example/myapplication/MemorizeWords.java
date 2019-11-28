@@ -35,13 +35,21 @@ public class MemorizeWords extends AppCompatActivity {
         bknow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(knownum>=totalnum){
+                    finish();
+                    return;
+                }
                 nextword(1);
-
             }
         });
         bunknow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 String text=bunknow.getText().toString();
                 if(text.equals("提示一下吧")){
                     tvhintchinese.setText(nowword.getChineses());
@@ -133,6 +141,7 @@ public class MemorizeWords extends AppCompatActivity {
         });
         bb.setMessage("你确定要丢掉"+nowword.getWord()+" "+nowword.getChineses());
         bb.setTitle("提示");
+        bb.setCancelable(false);
         bb.show();
 
     }
@@ -152,7 +161,10 @@ public class MemorizeWords extends AppCompatActivity {
         });
         bbb.setTitle("消息");
         bbb.setMessage("完成啦！");
+        bbb.setCancelable(false);
         bbb.show();
+//        finish();
+//        return;
 
     }
 
