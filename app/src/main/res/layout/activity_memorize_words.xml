@@ -128,7 +128,7 @@
             android:layout_weight="5"
             android:gravity="center"
             android:textSize="40dp"
-            android:text="wo" />
+            android:text="" />
 
     </LinearLayout>
 
