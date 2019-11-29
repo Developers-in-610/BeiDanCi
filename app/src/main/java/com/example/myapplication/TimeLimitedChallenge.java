@@ -1,10 +1,14 @@
 package com.example.myapplication;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +42,12 @@ public class TimeLimitedChallenge extends AppCompatActivity implements View.OnCl
     Button choice3;
     Button choice4;
     private volatile boolean exit=false;
+    private int record;
+    private SharedPreferences sp;
+
+    private SharedPreferences.Editor editor;
+
+
 
     private class Counter implements Runnable
     {
@@ -47,8 +57,9 @@ public class TimeLimitedChallenge extends AppCompatActivity implements View.OnCl
             if (msg.what == 0) {
                 // 倒计时结束
                 if(score<=wordnum)
-                showDialog("挑战结束，得分："+score);
-                else showDialog("挑战结束，得分"+wordnum);
+                showDialog("挑战结束，得分"+score+"   " +
+                        "历史最高得分"+record);
+                else showDialog("挑战结束，得分"+wordnum+"   历史最高得分"+record);
             }
         }
     };
@@ -59,6 +70,7 @@ public class TimeLimitedChallenge extends AppCompatActivity implements View.OnCl
 if(!exit)
 {  handler.sendEmptyMessage(i);
                 try {
+
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -119,12 +131,27 @@ public void nextWord()
 {
 init(++index);
 }
+public void saveRecord()
+{
+    record=sp.getInt("old_record",0);
+    if(record<=score)
+    {editor.putInt("old_record",score);
+    record=score;
 
+
+    Toast.makeText(TimeLimitedChallenge.this,"新纪录！",Toast.LENGTH_SHORT).show();
+    }
+
+    editor.commit();
+
+}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_challenge1);
+        sp=getSharedPreferences("TheRecord",Context.MODE_PRIVATE);
+        editor=sp.edit();
         wordnum = 0;
         score=0;
         al = DatabaseUtil.GetALLWord();
@@ -145,7 +172,6 @@ init(++index);
         choice4.setOnClickListener(this);
 
 
-
                 }
                 @Override
     public void onClick(View view)
@@ -153,7 +179,9 @@ init(++index);
 
                     if(wordnum==totalnum){
 exit=true;
-                        showDialog("挑战结束，得分"+score);
+                        saveRecord();
+                        showDialog("挑战结束，得分"+score+" " + ""+
+                                "历史最高得分"+record);
                         return;
                     }
                     switch (view.getId()){
