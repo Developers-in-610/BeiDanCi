@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -96,6 +97,11 @@ public class MemorizeWords extends AppCompatActivity {
         tvenglish.setText(nowword.getWord());
         bknow.setText("我认识");
         bunknow.setText("提示一下吧");
+        if(!NetworkUtil.isNetworkAvailable(this)) {
+            bplayvoice.setEnabled(false);
+            Toast.makeText(this, "网络不可用，无法发音", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     //新单词操作

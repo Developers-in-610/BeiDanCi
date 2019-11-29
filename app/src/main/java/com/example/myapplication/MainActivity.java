@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     public static int fence;
@@ -34,6 +35,7 @@ public class MainActivity extends Activity {
         //将数据库写入手机
         DBManager dbHelper=new DBManager(this);
         dbHelper.openDatabase();
+
         Button review=(Button)findViewById(R.id.button);
         Button memorize=(Button) findViewById(R.id.memwords);
         review.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +52,17 @@ public class MainActivity extends Activity {
         });
 
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!NetworkUtil.isNetworkAvailable(this)) {
+            NetworkUtil.showSetNetworkUI(this);
+        } else {
+            Toast.makeText(this, "网络可用...", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }
