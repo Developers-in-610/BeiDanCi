@@ -25,19 +25,36 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="今日ok单词" />
+                android:textSize="20dp"
+                android:text="今日记熟" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="20dp"
                 android:text="30" />
 
             <TextView
                 android:id="@+id/okword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="20dp"
                 android:text="0" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@mipmap/clock"
+                />
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -50,39 +67,25 @@
                 android:id="@+id/textview08"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="20dp"
                 android:text="今日新词" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="20dp"
                 android:text="30" />
 
             <TextView
                 android:id="@+id/newword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="20dp"
                 android:text="0" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="用时" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="3min" />
-        </LinearLayout>
 
     </LinearLayout>
 
@@ -98,23 +101,34 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:textSize="30dp"
             android:gravity="center"
-
             android:text="abandon" />
-
-        <Button
-            android:id="@+id/voiceplay"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="朗读一下吧" />
+            android:gravity="center"
+            >
+
+
+            <Button
+                android:id="@+id/voiceplay"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+
+                android:gravity="center"
+                android:background="@drawable/laba" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/hintchinese"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="5"
-            android:text="我是提示" />
+            android:gravity="center"
+            android:textSize="40dp"
+            android:text="wo" />
 
     </LinearLayout>
 
