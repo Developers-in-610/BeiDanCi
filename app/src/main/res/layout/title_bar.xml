@@ -11,9 +11,9 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="今日需背单词数：30/30"
+        android:text="今日需背单词数：0"
         android:id="@+id/letterNum"
-        android:layout_gravity="center"
+        android:gravity="center"
         />
     <ImageView
         android:layout_width="0dp"
@@ -26,7 +26,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:id="@+id/correctNum"
-        android:text="答对单词个数：0/30"
+        android:text="今日已背单词数:0"
+        android:gravity="center"
 
         />
 

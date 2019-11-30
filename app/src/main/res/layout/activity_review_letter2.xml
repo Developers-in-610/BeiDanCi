@@ -13,7 +13,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="40dp"
         android:gravity="center"
         android:text="adj:特大的；巨大的"
         android:id="@+id/chinese"
@@ -63,9 +63,22 @@
             android:textAllCaps="false"
             android:textSize="20dp"
             />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="√已学会"
+                android:id="@+id/okk"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
 
+                android:textColor="#ffffff"
+                />
+        </RelativeLayout>
     </LinearLayout>
-
 
 
 </LinearLayout>
