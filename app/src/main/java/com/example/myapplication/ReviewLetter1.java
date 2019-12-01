@@ -30,9 +30,15 @@ public class ReviewLetter1 extends AppCompatActivity {
     ImageView judge;
     ArrayList<Words> wordsArrayList;
     TextView correctAnswer;
+    TextView textView1;
+    TextView textView2;
+
     int count;
     int time;
+    int num;
+
     Words word;
+    int n;
     AlertDialog.Builder dialog;
     private static int fence;
     private static final int COMPLETED = 0;
@@ -58,6 +64,7 @@ public class ReviewLetter1 extends AppCompatActivity {
     }
     private void init(){
         count=1;
+        n=0;
         chinese=(TextView)findViewById(R.id.chinese);
         answer=(EditText)findViewById(R.id.answer);
         submit=(Button)findViewById(R.id.submit);
@@ -65,6 +72,9 @@ public class ReviewLetter1 extends AppCompatActivity {
         dialog=new AlertDialog.Builder(ReviewLetter1.this);
         judge=(ImageView)findViewById(R.id.judge);
         correctAnswer=(TextView)findViewById(R.id.correct_answer);
+        textView1=(TextView)findViewById(R.id.letterNum);
+        textView2=(TextView)findViewById(R.id.correctNum);
+
 
     }
 
@@ -80,13 +90,27 @@ public class ReviewLetter1 extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             if(msg.what==COMPLETED){
-                flush(count);
-                count++;
-                judge.setVisibility(View.INVISIBLE);
-                answer.setText("");
-                correctAnswer.setVisibility(View.INVISIBLE);
-                submit.setVisibility(View.VISIBLE);
-                iKnow.setVisibility(View.VISIBLE);
+                if(wordsArrayList.size()!=0){
+                    if(count<wordsArrayList.size()){
+
+                        flush(count);
+                        count++;
+                    }else {
+                        count=1;
+
+                        flush(count-1);
+                    }
+
+                    judge.setVisibility(View.INVISIBLE);
+                    answer.setText("");
+                    correctAnswer.setVisibility(View.INVISIBLE);
+                    submit.setVisibility(View.VISIBLE);
+                    iKnow.setVisibility(View.VISIBLE);
+                }else {
+                    setAlert("恭喜你！今天的复习任务已经完成啦！");
+                }
+
+
             }
         }
     };
@@ -95,7 +119,7 @@ public class ReviewLetter1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_letter1);
         init();
-        int num=0;
+
         fence=getIntent().getIntExtra("Fence",0);
         //Log.v("hhh","count:"+DatabaseUtil.countNum(fence));
         //Log.v("hh","letter_create: "+fence);
@@ -104,15 +128,18 @@ public class ReviewLetter1 extends AppCompatActivity {
            setAlert("当前没有新词可复习，赶紧去背新词吧！");
            return;
 
-        }else  if(DatabaseUtil.countNum(fence)<15){
+        }else  if(DatabaseUtil.countNum(fence)<3){
             num=DatabaseUtil.countNum(fence);
 
         }else {
-            num=15;
+            num=3;
         }
+
         //Log.v("hh","num="+num);
         wordsArrayList=DatabaseUtil.ReviewWord(num,fence);
         //Log.v("hh","size: "+wordsArrayList.size());
+        ReviewLetterShare.print1(textView1,num);
+        ReviewLetterShare.print2(textView2,0);
 
         word=wordsArrayList.get(0);
         chinese.setText(word.getChineses());
@@ -120,9 +147,7 @@ public class ReviewLetter1 extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fence++;
-
-                if(count<wordsArrayList.size()){
+                if(n<num){
 
                     String ans=answer.getText().toString();
 
@@ -133,8 +158,13 @@ public class ReviewLetter1 extends AppCompatActivity {
                     iKnow.setVisibility(View.GONE);
                     if(ans.equals(word.getWord())){
                         judge.setImageResource(R.mipmap.correct);
+
                         time=500;
                         DatabaseUtil.SetWordvis(word,DatabaseUtil.UNKNOWN_WORD_CAN);
+                        n++;
+                        ReviewLetterShare.print2(textView2,n);
+                        fence++;
+                        wordsArrayList.remove(word);
 
                     }else {
                         judge.setImageResource(R.mipmap.wrong);
@@ -168,18 +198,29 @@ public class ReviewLetter1 extends AppCompatActivity {
         iKnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fence++;
-                Words words=wordsArrayList.get(count);
-                if(count<wordsArrayList.size()){
+
+                if(n<num){
+                    Words words=wordsArrayList.get(count-1);
                     DatabaseUtil.SetWordvis(words,DatabaseUtil.KNOWN_WORD);
+                    n++;
+                    wordsArrayList.remove(words);
+                    ReviewLetterShare.print2(textView2,n);
+                    if(wordsArrayList.size()!=0){
+                        if(count<wordsArrayList.size()){
+                            flush(count);
+                            count++;
+                        }else {
+                            count=1;
+                            flush(count-1);
+                        }
 
-                    flush(count);
-                    count++;
-                    fence--;
+                    }else {
+                        setAlert("恭喜你！今天的复习任务已经完成啦！");
+                    }
 
-                }else {
-                    setAlert("恭喜你！今天的复习任务已经完成啦！");
+
                 }
+
             }
         });
 
