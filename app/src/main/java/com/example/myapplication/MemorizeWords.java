@@ -6,19 +6,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewDebug;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MemorizeWords extends AppCompatActivity {
     private ArrayList<Words> al;
     private int index;
     private Button bknow;
+    private int todayleftwordnum;
     private Button bunknow;
     private TextView tvhintchinese,tvnewword,tvokword,tvdayword01,tvdayword02;
     private TextView tvenglish;
@@ -27,6 +30,13 @@ public class MemorizeWords extends AppCompatActivity {
     public static int totalnum;
     private Button bthrowit;
     private Button bplayvoice;
+    public  static final String shkonwwordkey="knownum";
+    public  static final String shnewwordkey="newwordnum";
+    public  String timekey;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -84,13 +94,6 @@ public class MemorizeWords extends AppCompatActivity {
     //初始化
     public void init(){
         totalnum=MainActivity.daywords;
-        knownum=0;newwordnum=0;
-        al=DatabaseUtil.GetWord(0,totalnum);
-        tvdayword01=(TextView) findViewById(R.id.daywords01);
-        tvdayword02=(TextView) findViewById(R.id.dayword02);
-        tvdayword02.setText(""+MainActivity.daywords);
-        tvdayword01.setText(""+MainActivity.daywords);
-        index=0;
         bknow=(Button) findViewById(R.id.knowbutton);
         bunknow=(Button) findViewById(R.id.unknowbutton);
         bthrowit=(Button) findViewById(R.id.throwit);
@@ -99,6 +102,14 @@ public class MemorizeWords extends AppCompatActivity {
         tvenglish=(TextView) findViewById(R.id.english);
         tvokword=(TextView) findViewById(R.id.okword);
         tvnewword=(TextView) findViewById(R.id.newword);
+        Updatenowword();
+
+        tvdayword01=(TextView) findViewById(R.id.daywords01);
+        tvdayword02=(TextView) findViewById(R.id.dayword02);
+        tvdayword02.setText(""+MainActivity.daywords);
+        tvdayword01.setText(""+MainActivity.daywords);
+        index=0;
+
         nowword=al.get(index);
         tvenglish.setText(nowword.getWord());
         bknow.setText("我认识");
@@ -126,9 +137,9 @@ public class MemorizeWords extends AppCompatActivity {
                 return;
             }
         }
-        index=(index+1)%totalnum;
+        index=(index+1)%todayleftwordnum;
         while (al.get(index).getVisted()==1||al.get(index).getVisted()==3) {
-            index = (index + 1) % totalnum;
+            index = (index + 1) % todayleftwordnum;
         }
         nowword=al.get(index);
         tvhintchinese.setText("");
@@ -187,5 +198,45 @@ public class MemorizeWords extends AppCompatActivity {
 
 
     }
+    private void Updatenowword(){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH)+1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        timekey=year+""+month+""+day;
+        SharedPreferences sharedPreferences=getSharedPreferences(timekey,MODE_PRIVATE);
+        if(sharedPreferences.getInt(shkonwwordkey,0)!=0){
+            knownum=sharedPreferences.getInt(shkonwwordkey,0);
+            newwordnum=knownum;
 
+        }
+        else{
+            knownum=0;
+            newwordnum=0;
+
+        }
+        tvokword.setText(""+knownum);
+        tvnewword.setText(""+newwordnum);
+        al=DatabaseUtil.GetWord(0,totalnum-knownum);
+        todayleftwordnum=totalnum-knownum;
+
+
+
+
+
+
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences sharedPreferences=getSharedPreferences(timekey,MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putInt(shkonwwordkey,knownum);
+        editor.putInt(shnewwordkey,newwordnum);
+        editor.apply();
+
+    }
 }

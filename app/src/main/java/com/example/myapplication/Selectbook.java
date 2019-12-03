@@ -66,10 +66,8 @@ public class Selectbook extends Activity {
                 editor.putString(sharedbnamekey,DBManager.DB_NAME);
                 editor.putInt(sharedaywordkey,MainActivity.daywords);
                 editor.apply();
-                if(needRunMain){
-                    Intent it = new Intent(Selectbook.this,MainActivity.class);
-                    startActivity(it);
-                }
+                Intent it = new Intent(Selectbook.this,MainActivity.class);
+                startActivity(it);
                 finish();
                 return;
             }
