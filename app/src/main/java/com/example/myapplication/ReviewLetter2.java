@@ -41,9 +41,10 @@ public class ReviewLetter2 extends AppCompatActivity implements View.OnClickList
     private static int n;
 
     public void actionStart(Context context, int f){
-        Intent intent=new Intent(context,MainActivity.class);
+        Intent intent=new Intent(context,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("newFence",f);
         context.startActivity(intent);
+
 
 
     }
