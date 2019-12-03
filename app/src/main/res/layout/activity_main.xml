@@ -5,15 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@mipmap/background3">
 
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_weight="7"
+        android:layout_weight="2"
         android:layout_height="0dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <LinearLayout
             android:layout_width="0dp"
@@ -22,13 +24,18 @@
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="剩余"/>
+                android:layout_height="30dp"
+                android:text="剩余"
+                android:textSize="20dp"
+                android:gravity="center"
+                />
             <TextView
                 android:id="@+id/day"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""/>
+                android:layout_height="30dp"
+                android:text="96天"
+                android:textSize="20dp"
+                android:gravity="center"/>
 
 
         </LinearLayout>
@@ -40,50 +47,74 @@
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="单词"/>
+                android:layout_height="30dp"
+                android:text="单词"
+                android:textSize="20dp"
+                android:gravity="center"/>
             <TextView
                 android:id="@+id/words"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""/>
+                android:layout_height="30dp"
+                android:text="30个"
+                android:textSize="20dp"
+                android:gravity="center"/>
 
         </LinearLayout>
-    </LinearLayout>
 
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:src="@mipmap/phh"
+        android:layout_marginBottom="40dp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="六级词汇"
-            />
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:textSize="16dp"
+                android:layout_height="match_parent"
+                android:text="六级词汇"
+                android:gravity="center"
+                />
+            <Button
+                android:id="@+id/books"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="修改计划"
+                android:background="#b5d3fa"/>
+
+        </LinearLayout>
+
         <Button
-            android:id="@+id/books"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="修改计划"/>
+            android:id="@+id/memwords"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#6ba7e5"
+            android:layout_marginTop="30dp"
 
+            android:text="开始背单词吧" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#6ba7e5"
+            android:layout_marginTop="30dp"
+
+            android:text="开始复习吧" />
     </LinearLayout>
-    <Button
-        android:id="@+id/memwords"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="15dp"
-        android:background="#ff0000"
-        android:layout_weight="1"
-        android:text="开始背单词吧" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="#ff00ff"
-        android:layout_weight="1"
-        android:text="开始复习吧" />
 </LinearLayout>

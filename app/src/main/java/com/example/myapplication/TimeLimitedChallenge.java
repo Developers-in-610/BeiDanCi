@@ -134,7 +134,7 @@ init(++index);
 public void saveRecord()
 {
     record=sp.getInt("old_record",0);
-    if(record<=score)
+    if(record<score)
     {editor.putInt("old_record",score);
     record=score;
 
