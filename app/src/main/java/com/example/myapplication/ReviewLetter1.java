@@ -44,10 +44,12 @@ public class ReviewLetter1 extends AppCompatActivity {
     private static final int COMPLETED = 0;
 
 
-    public static void actionStart(Context context,int f){
+    public void actionStart(Context context, int f){
         Intent intent=new Intent(context,MainActivity.class);
         intent.putExtra("newFence",f);
+
         context.startActivity(intent);
+
         Log.v("hh","letter1action: "+f);
     }
     private void setAlert(String s){
@@ -58,6 +60,7 @@ public class ReviewLetter1 extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 actionStart(ReviewLetter1.this,fence);
+
             }
         });
         dialog.show();
@@ -168,7 +171,7 @@ public class ReviewLetter1 extends AppCompatActivity {
 
                     }else {
                         judge.setImageResource(R.mipmap.wrong);
-                        time=200;
+                        time=3000;
                         correctAnswer.setText(word.getWord());
                         correctAnswer.setVisibility(View.VISIBLE);
                         DatabaseUtil.SetWordvis(word,DatabaseUtil.UNKNOWN_WORD_CANT);

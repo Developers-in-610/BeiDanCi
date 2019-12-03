@@ -21,7 +21,8 @@
             android:enabled="true"
             android:exported="true"></service>
 
-        <activity android:name=".Main2Activity">
+        <activity android:name=".Main2Activity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +30,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MemorizeWords" />
-        <activity android:name=".ReviewLetter2" />
+        <activity android:name=".ReviewLetter2"
+            />
+
+
         <activity android:name=".ReviewLetter1" />
         <activity android:name=".ReviewLetterMain" />
         <activity android:name=".TimeLimitedChallenge" />

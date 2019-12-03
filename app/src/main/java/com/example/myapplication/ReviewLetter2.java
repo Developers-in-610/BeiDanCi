@@ -40,10 +40,11 @@ public class ReviewLetter2 extends AppCompatActivity implements View.OnClickList
     ArrayList<Words>QList;
     private static int n;
 
-    public static void actionStart(Context context, int f){
+    public void actionStart(Context context, int f){
         Intent intent=new Intent(context,MainActivity.class);
         intent.putExtra("newFence",f);
         context.startActivity(intent);
+
 
     }
 
