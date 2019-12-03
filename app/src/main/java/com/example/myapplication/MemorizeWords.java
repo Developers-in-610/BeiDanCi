@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +20,7 @@ public class MemorizeWords extends AppCompatActivity {
     private int index;
     private Button bknow;
     private Button bunknow;
-    private TextView tvhintchinese,tvnewword,tvokword;
+    private TextView tvhintchinese,tvnewword,tvokword,tvdayword01,tvdayword02;
     private TextView tvenglish;
     private Words nowword;
     private int knownum,newwordnum;
@@ -82,8 +83,13 @@ public class MemorizeWords extends AppCompatActivity {
     }
     //初始化
     public void init(){
-        totalnum=5;knownum=0;newwordnum=0;
+        totalnum=MainActivity.daywords;
+        knownum=0;newwordnum=0;
         al=DatabaseUtil.GetWord(0,totalnum);
+        tvdayword01=(TextView) findViewById(R.id.daywords01);
+        tvdayword02=(TextView) findViewById(R.id.dayword02);
+        tvdayword02.setText(""+MainActivity.daywords);
+        tvdayword01.setText(""+MainActivity.daywords);
         index=0;
         bknow=(Button) findViewById(R.id.knowbutton);
         bunknow=(Button) findViewById(R.id.unknowbutton);

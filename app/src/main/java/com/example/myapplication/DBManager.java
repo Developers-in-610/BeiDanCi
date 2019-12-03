@@ -14,8 +14,8 @@ import java.io.InputStream;
 public class DBManager {
     private final int BUFFER_SIZE
             = 400000;
-    public static final String
-            DB_NAME = "words.db";
+    public static  String
+            DB_NAME = Selectbook.cetbook[0];
     //保存的数据库文件名
     public static final String
             PACKAGE_NAME = "com.example.myapplication";

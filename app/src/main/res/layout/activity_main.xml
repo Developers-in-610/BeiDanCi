@@ -28,7 +28,7 @@
                 android:id="@+id/day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="96天"/>
+                android:text=""/>
 
 
         </LinearLayout>
@@ -46,7 +46,7 @@
                 android:id="@+id/words"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="30个"/>
+                android:text=""/>
 
         </LinearLayout>
     </LinearLayout>

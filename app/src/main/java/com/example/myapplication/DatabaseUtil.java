@@ -199,6 +199,17 @@ public class DatabaseUtil {
         }
         return ans;
     }
+    public static int getnumgroupbyvis(int vis){
+        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" +
+                DBManager.DB_NAME, null);
+//        Cursor cursor = db.rawQuery
+//                ("select count(*) from Words where vis=?",new String[]{""+vis});
+        Cursor cursor = db.rawQuery("select count(*) from words where vis=0",null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0);
+        cursor.close();
+        return count;
+    }
 
 
 
