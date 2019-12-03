@@ -57,8 +57,9 @@ public class TimeLimitedChallenge extends AppCompatActivity implements View.OnCl
             if (msg.what == 0) {
                 // 倒计时结束
                 if(score<=wordnum)
-                showDialog("挑战结束，得分"+score+"   " +
-                        "历史最高得分"+record);
+                {saveRecord();
+                    showDialog("挑战结束，得分"+score+"   " +
+                        "历史最高得分"+record);}
                 else showDialog("挑战结束，得分"+wordnum+"   历史最高得分"+record);
             }
         }
@@ -98,7 +99,8 @@ if(!exit)
     private DialogInterface.OnClickListener click2=new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            startActivity(new Intent(TimeLimitedChallenge.this,ReviewLetterMain.class));
+            //startActivity(new Intent(TimeLimitedChallenge.this,ReviewLetterMain.class));
+            finish();
         }
     };
 
@@ -157,7 +159,9 @@ public void saveRecord()
         al = DatabaseUtil.GetALLWord();
         totalnum = al.size();
         if (totalnum < 4)
-            showDialog("单词数量不足以进行挑战");
+        {showDialog("单词数量不足以进行挑战");
+        return;
+        }
         else
             Collections.shuffle(al);
         init(0);

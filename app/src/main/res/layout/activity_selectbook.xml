@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Selectbook">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="选择学习书本"/>
+
+        <Spinner
+            android:id="@+id/sbook"
+            android:layout_width="200dp"
+            android:background="#cccc00"
+            android:layout_height="wrap_content"
+            android:entries="@array/ctype" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="选择每日学习数量"/>
+
+        <Spinner
+            android:id="@+id/sday"
+            android:layout_width="200dp"
+            android:background="#cccc00"
+            android:layout_height="wrap_content"
+            android:entries="@array/cday" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/checkdone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确定" />
+</LinearLayout>

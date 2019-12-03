@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/membg"
     tools:context=".MemorizeWords">
 
 
@@ -29,11 +30,11 @@
                 android:text="今日记熟" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/dayword02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="30" />
+                android:text="30"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/okword"
@@ -71,7 +72,7 @@
                 android:text="今日新词" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/daywords01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -127,7 +128,7 @@
             android:layout_height="0dp"
             android:layout_weight="5"
             android:gravity="center"
-            android:textSize="40dp"
+            android:textSize="30dp"
             android:text="" />
 
     </LinearLayout>
@@ -137,6 +138,8 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="0.5"
+    android:layout_marginLeft="35dp"
+    android:layout_marginRight="35dp"
     android:text="我认识" />
 
     <Button
@@ -144,6 +147,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:text="提示一下吧" />
 
     <Button
@@ -151,5 +156,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:text="太熟扔掉吧" />
 </LinearLayout>

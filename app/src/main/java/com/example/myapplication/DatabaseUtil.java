@@ -110,6 +110,33 @@ public class DatabaseUtil {
         c.close();
         return al;
     }
+    public static ArrayList<Words> Get02Word(int num) {
+        SQLiteDatabase readableDatabase = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" +
+                DBManager.DB_NAME, null);
+        Cursor c=null;
+        c = readableDatabase.rawQuery("select * from words where vis = ? or vis= ?", new String[]{"" +0,""+2});
+
+        ArrayList<Words> al = new ArrayList<Words>();
+        while (c.moveToNext()) {
+            int _id = c.getInt(c.getColumnIndex("id"));
+            String word = c.getString(c.getColumnIndex("word"));
+            String chineses = c.getString(c.getColumnIndex("chineses"));
+            chineselibrary.add(chineses);
+            Englishlibraty.add(word);
+            Words words = new Words();
+            words.setId(_id);
+            words.setWord(word);
+            words.setChineses(chineses);
+            words.setVisted(c.getInt(c.getColumnIndex("vis")));
+            al.add(words);
+            if (al.size()==num)
+                break;
+
+        }
+        c.close();
+        return al;
+    }
+
     public static ArrayList<Words> GetALLWord() {
         SQLiteDatabase readableDatabase = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" +
                 DBManager.DB_NAME, null);
@@ -198,6 +225,17 @@ public class DatabaseUtil {
             count++;
         }
         return ans;
+    }
+    public static int getnumgroupbyvis(int vis){
+        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" +
+                DBManager.DB_NAME, null);
+//        Cursor cursor = db.rawQuery
+//                ("select count(*) from Words where vis=?",new String[]{""+vis});
+        Cursor cursor = db.rawQuery("select count(*) from words where vis=0",null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0);
+        cursor.close();
+        return count;
     }
 
 
