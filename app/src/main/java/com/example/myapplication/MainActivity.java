@@ -65,10 +65,15 @@ public class MainActivity extends Activity {
     }
     public void initdayview(){
         int daynum=(int)Math.ceil(DatabaseUtil.getnumgroupbyvis(0)/MainActivity.daywords);
+        TextView tvbooks=(TextView) findViewById(R.id.tvbook);
         TextView tvdaynums=(TextView) findViewById(R.id.day);
         TextView tvdaywords=(TextView) findViewById(R.id.words);
         tvdaynums.setText(""+daynum);
         tvdaywords.setText(""+MainActivity.daywords);
+        if(DBManager.DB_NAME==Selectbook.cetbook[0])
+            tvbooks.setText("四级词汇");
+        else
+            tvbooks.setText("六级词汇");
     }
 
     @Override
