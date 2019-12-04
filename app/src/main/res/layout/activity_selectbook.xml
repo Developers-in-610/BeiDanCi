@@ -5,48 +5,69 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".Selectbook">
+    tools:context=".Selectbook"
+    android:background="@mipmap/background5">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="选择学习书本"/>
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="选择学习书本"
+                android:layout_marginBottom="20dp"
+                />
 
-        <Spinner
-            android:id="@+id/sbook"
-            android:layout_width="200dp"
-            android:background="#cccc00"
-            android:layout_height="wrap_content"
-            android:entries="@array/ctype" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="选择每日学习数量"/>
+            <Spinner
+                android:id="@+id/sbook"
+                android:layout_width="150dp"
 
-        <Spinner
-            android:id="@+id/sday"
-            android:layout_width="200dp"
-            android:background="#cccc00"
-            android:layout_height="wrap_content"
-            android:entries="@array/cday" />
+                android:layout_height="wrap_content"
+                android:entries="@array/ctype"
+                android:dropDownWidth="150dp"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="选择每日学习数量"
+                android:layout_marginBottom="20dp"/>
+
+            <Spinner
+                android:id="@+id/sday"
+                android:layout_width="150dp"
+
+                android:layout_height="wrap_content"
+                android:entries="@array/cday"
+                android:dropDownWidth="150dp"/>
+        </LinearLayout>
     </LinearLayout>
+
+
 
     <Button
         android:id="@+id/checkdone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="确定" />
+        android:layout_margin="30dp"
+        android:text="确定"
+        android:background="#d6d9ff"/>
 </LinearLayout>

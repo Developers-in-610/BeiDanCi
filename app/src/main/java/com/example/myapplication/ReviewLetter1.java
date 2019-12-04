@@ -44,11 +44,12 @@ public class ReviewLetter1 extends AppCompatActivity {
     private static final int COMPLETED = 0;
 
 
-    public static void actionStart(Context context,int f){
-        Intent intent=new Intent(context,MainActivity.class);
+    public void actionStart(Context context, int f){
+        Intent intent=new Intent(context,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("newFence",f);
+
         context.startActivity(intent);
-        Log.v("hh","letter1action: "+f);
+
     }
     private void setAlert(String s){
 
@@ -58,6 +59,7 @@ public class ReviewLetter1 extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 actionStart(ReviewLetter1.this,fence);
+
             }
         });
         dialog.show();
@@ -121,8 +123,7 @@ public class ReviewLetter1 extends AppCompatActivity {
         init();
 
         fence=getIntent().getIntExtra("Fence",0);
-        //Log.v("hhh","count:"+DatabaseUtil.countNum(fence));
-        //Log.v("hh","letter_create: "+fence);
+
 
         if(DatabaseUtil.countNum(fence)<=0){
            setAlert("当前没有新词可复习，赶紧去背新词吧！");
@@ -135,9 +136,9 @@ public class ReviewLetter1 extends AppCompatActivity {
             num=3;
         }
 
-        //Log.v("hh","num="+num);
+
         wordsArrayList=DatabaseUtil.ReviewWord(num,fence);
-        //Log.v("hh","size: "+wordsArrayList.size());
+
         ReviewLetterShare.print1(textView1,num);
         ReviewLetterShare.print2(textView2,0);
 
@@ -152,8 +153,6 @@ public class ReviewLetter1 extends AppCompatActivity {
                     String ans=answer.getText().toString();
 
                         word=wordsArrayList.get(count-1);
-
-                    //Log.v("hh","pos"+count);
                     submit.setVisibility(View.GONE);
                     iKnow.setVisibility(View.GONE);
                     if(ans.equals(word.getWord())){
@@ -168,7 +167,7 @@ public class ReviewLetter1 extends AppCompatActivity {
 
                     }else {
                         judge.setImageResource(R.mipmap.wrong);
-                        time=200;
+                        time=3000;
                         correctAnswer.setText(word.getWord());
                         correctAnswer.setVisibility(View.VISIBLE);
                         DatabaseUtil.SetWordvis(word,DatabaseUtil.UNKNOWN_WORD_CANT);
