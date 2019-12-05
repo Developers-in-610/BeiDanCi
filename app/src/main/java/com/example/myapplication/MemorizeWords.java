@@ -231,7 +231,7 @@ public class MemorizeWords extends AppCompatActivity {
         }
         tvokword.setText(""+knownum);
         tvnewword.setText(""+newwordnum);
-        if(knownum==MainActivity.daywords){
+        if(knownum>=MainActivity.daywords){
             ShowExtendWordsDialog();
         }
         al=DatabaseUtil.GetWord(0,totalnum-knownum);
