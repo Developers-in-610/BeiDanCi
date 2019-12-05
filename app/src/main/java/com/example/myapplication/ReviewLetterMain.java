@@ -54,7 +54,7 @@ public class ReviewLetterMain extends AppCompatActivity {
     private void showDialog()
     {
         AlertDialog.Builder rule=new AlertDialog.Builder(this);
-        rule.setMessage("挑战规则：限时200秒，选择每个单词正确的英文或中文释义，答对计1分，答错不计分。");
+        rule.setMessage("挑战规则：限时200秒，选择每个单词正确的中文释义，答对计1分，答错不计分。");
         rule.setPositiveButton("开始挑战",click1);
         rule.setNegativeButton("不挑战",click2);
         rule.create().show();
