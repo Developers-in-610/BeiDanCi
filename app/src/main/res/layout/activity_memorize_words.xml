@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/membg"
+    android:background="@mipmap/background8"
     tools:context=".MemorizeWords">
 
 
@@ -20,12 +20,15 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+
                 android:textSize="20dp"
                 android:text="今日记熟" />
 
@@ -52,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@mipmap/clock"
+                android:src="@mipmap/pig"
                 />
 
 
@@ -62,7 +65,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginRight="10dp">
 
             <TextView
                 android:id="@+id/textview08"
@@ -89,74 +93,74 @@
 
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:orientation="vertical">
-
-
-        <TextView
-            android:id="@+id/english"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:text="abandon" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-
-            <Button
-                android:id="@+id/voiceplay"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-
-                android:gravity="center"
-                android:background="@drawable/laba" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/hintchinese"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:gravity="center"
-            android:textSize="30dp"
-            android:text="" />
-
-    </LinearLayout>
-
-    <Button
-    android:id="@+id/knowbutton"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="0.5"
-    android:layout_marginLeft="35dp"
-    android:layout_marginRight="35dp"
-    android:text="我认识" />
+    android:layout_weight="5"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    >
+    <TextView
+        android:id="@+id/english"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+android:layout_marginBottom="5dp"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:text="abandon" />
+    <Button
+        android:id="@+id/voiceplay"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+
+
+        android:gravity="center"
+        android:background="@drawable/laba" />
+
+    <TextView
+        android:id="@+id/hintchinese"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:gravity="center"
+        android:textSize="18dp"
+        android:text="" />
+    <Button
+        android:id="@+id/knowbutton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:text="我认识"
+        android:background="#adeef9"
+        />
 
     <Button
         android:id="@+id/unknowbutton"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:text="提示一下吧" />
+        android:text="提示一下吧"
+        android:background="#adeef9"
+
+        />
 
     <Button
         android:id="@+id/throwit"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_height="50dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:text="太熟扔掉吧" />
+        android:text="太熟扔掉吧"
+        android:background="#adeef9"/>
+</LinearLayout>
+
+
+
 </LinearLayout>

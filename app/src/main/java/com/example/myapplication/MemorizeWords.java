@@ -43,7 +43,6 @@ public class MemorizeWords extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memorize_words);
         init();
-
         bknow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,11 +102,10 @@ public class MemorizeWords extends AppCompatActivity {
         tvokword=(TextView) findViewById(R.id.okword);
         tvnewword=(TextView) findViewById(R.id.newword);
         Updatenowword();
-
         tvdayword01=(TextView) findViewById(R.id.daywords01);
         tvdayword02=(TextView) findViewById(R.id.dayword02);
-        tvdayword02.setText(""+MainActivity.daywords);
-        tvdayword01.setText(""+MainActivity.daywords);
+        tvdayword02.setText(""+totalnum);
+        tvdayword01.setText(""+totalnum);
         index=0;
 
         nowword=al.get(index);
@@ -190,6 +188,22 @@ public class MemorizeWords extends AppCompatActivity {
 //        return;
 
     }
+    public void  ShowExtendWordsDialog(){
+        AlertDialog.Builder bbb=new AlertDialog.Builder(this);
+        bbb.setPositiveButton("好", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        bbb.setTitle("消息");
+        bbb.setMessage("今日已经完成啦！休息一下吧");
+        bbb.setCancelable(false);
+        bbb.show();
+
+
+    }
 
     public void startvoice(){
         Intent intent = new Intent(this, wordvoice.class);
@@ -217,6 +231,9 @@ public class MemorizeWords extends AppCompatActivity {
         }
         tvokword.setText(""+knownum);
         tvnewword.setText(""+newwordnum);
+        if(knownum==MainActivity.daywords){
+            ShowExtendWordsDialog();
+        }
         al=DatabaseUtil.GetWord(0,totalnum-knownum);
         todayleftwordnum=totalnum-knownum;
 
