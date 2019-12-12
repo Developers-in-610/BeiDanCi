@@ -129,11 +129,11 @@ public class ReviewLetter1 extends AppCompatActivity {
            setAlert("当前没有新词可复习，赶紧去背新词吧！");
            return;
 
-        }else  if(DatabaseUtil.countNum(fence)<3){
+        }else  if(DatabaseUtil.countNum(fence)<15){
             num=DatabaseUtil.countNum(fence);
 
         }else {
-            num=3;
+            num=15;
         }
 
 

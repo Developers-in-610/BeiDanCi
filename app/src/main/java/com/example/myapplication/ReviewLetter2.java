@@ -156,11 +156,11 @@ public class ReviewLetter2 extends AppCompatActivity implements View.OnClickList
             setAlert("当前没有新词可复习，赶紧去背新词吧！");
             return;
 
-        }else  if(DatabaseUtil.countNum(fence)<5){
+        }else  if(DatabaseUtil.countNum(fence)<15){
             num=DatabaseUtil.countNum(fence);
 
         }else {
-            num=5;
+            num=15;
         }
         ReviewLetterShare.print1(need,num);
         ReviewLetterShare.print2(reviewed,0);
