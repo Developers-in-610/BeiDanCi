@@ -86,6 +86,8 @@ public class DBManager {
     {
         this.database.close();
     }
+	public void test(){}
+
 
 }
 
