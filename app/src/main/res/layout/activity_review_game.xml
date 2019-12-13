@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background2"
+    android:orientation="vertical"
+    tools:context=".ReviewGame">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="45dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/LinearLayout01"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="得分：0" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@mipmap/clock" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="" />
+
+    </LinearLayout>
+
+    <!-- 声明一个 垂直排列的线性布局，里面有一个table  -->
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!--  声明一个表格布局，ID：TableLayout，里面有8个按钮  -->
+        <TableLayout
+            android:id="@+id/TableLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:collapseColumns="2"
+            android:shrinkColumns="0,1">
+            <!--android:shrinkColumns作用是设置表格的列是否收缩（列编号从0开始），多列用逗号隔开，此例android:shrinkColumns="0,1"，即表格的第1、2列内容是收缩的以适合屏幕大小即不会挤出屏幕-->
+            <!--android:collapseColumns作用是设置表格的列是否隐藏（从0起算序数）-->
+            <!-- 定义为居中显示 -->
+            <TableRow android:gravity="center">
+
+                <Button
+                    android:id="@+id/button11"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#AEEEEE"
+                    android:text="按钮1-1"
+                    android:textAllCaps="false"
+
+                    />
+
+                <Button
+                    android:id="@+id/button12"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#AEEEEE"
+                    android:text="按钮1-2"
+                    android:textAllCaps="false" />
+            </TableRow><!-- 一行设置俩个按钮 -->
+            <TableRow android:gravity="center">
+
+                <Button
+                    android:id="@+id/button21"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#AEEEEE"
+                    android:text="按钮2-1"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/button22"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#AEEEEE"
+                    android:text="按钮2-2"
+                    android:textAllCaps="false" />
+            </TableRow>
+
+            <TableRow android:gravity="center">
+
+                <Button
+                    android:id="@+id/button31"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#AEEEEE"
+                    android:text="按钮3-1"
+                    android:textAllCaps="false"
+
+                    />
+
+                <Button
+                    android:id="@+id/button32"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#AEEEEE"
+                    android:text="按钮3-2"
+                    android:textAllCaps="false" />
+            </TableRow>
+
+            <TableRow android:gravity="center">
+
+                <Button
+                    android:id="@+id/button41"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#AEEEEE"
+                    android:text="按钮4-1"
+                    android:textAllCaps="false"
+                    />
+
+                <Button
+                    android:id="@+id/button42"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#AEEEEE"
+                    android:text="按钮4-2"
+                    android:textAllCaps="false"
+                />
+            </TableRow>
+
+
+        </TableLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

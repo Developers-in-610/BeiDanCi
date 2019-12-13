@@ -39,6 +39,7 @@
         <activity android:name=".ReviewLetterMain" />
         <activity android:name=".TimeLimitedChallenge" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".ReviewGame"/>
     </application>
 
 </manifest>

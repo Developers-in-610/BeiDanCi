@@ -75,7 +75,7 @@ public class TimeLimitedChallenge extends AppCompatActivity implements View.OnCl
         @Override
         public void run() {
 
-            for (int i = 20; i >= 0; i--) {
+            for (int i = 120; i >= 0; i--) {
                 if (!exit) {
                     handler.sendEmptyMessage(i);
                     try {
